@@ -1,14 +1,73 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Spreadsheet</title>
-	<link rel="stylesheet" href="styles/spreadsheet.css" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="scripts/spreadsheet.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.min.js" integrity="sha512-EJphfO0pq9xyT3qaHte1zam2S9a1PZ76oHBjayziMT+2lw/Y0NhkSVHS2rfl3t4UX/eyq/D6f9d2sjA6K9t/Kg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script type="text/javascript" src="scripts/chart.js"></script>
-  </head>
-  <body>
-	  <!-- YOUR CODE GOES HERE -->
-  </body>
+<head>
+  <title>Spreadsheet</title>
+  <link rel="stylesheet" href="styles/spreadsheet.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+    integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript" src="scripts/spreadsheet.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.min.js"
+    integrity="sha512-EJphfO0pq9xyT3qaHte1zam2S9a1PZ76oHBjayziMT+2lw/Y0NhkSVHS2rfl3t4UX/eyq/D6f9d2sjA6K9t/Kg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script type="text/javascript" src="scripts/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
+</head>
+
+<body>
+  <table id="spreadsheet">
+    <script>
+      $(document).ready(function () {
+        // load the CSV file
+        $.get("grades.csv", function (data) {
+          console.log("getting grades")
+          // split the data into rows
+          var rows = data.trim().split("\n");
+          // loop through the rows
+          for (var i = 0; i < rows.length; i++) {
+            // split the row into cells
+            var cells = rows[i].split(",");
+            // loop through the cells
+            for (var j = 0; j < cells.length; j++) {
+              // set the cell value in the table
+              $("#spreadsheet tbody tr:eq(" + i + ") td:eq(" + j + ")").text(cells[j]);
+            }
+          }
+        });
+      });
+    </script>
+    <thead>
+      <tr>
+        <th>Student ID</th> <!-- empty top-left cell -->
+        <th class="column-header" data-index="0">Column 1</th>
+        <th class="column-header" data-index="1">Column 2</th>
+        <th class="column-header" data-index="2">Column 3</th>
+        <th class="column-header" data-index="3">Column 3</th>
+        <th class="column-header" data-index="4">Column 3</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="row-header" data-index="0">Row 1</th>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th class="row-header" data-index="1">Row 2</th>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th class="row-header" data-index="2">Row 3</th>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
 </html>

@@ -1,1 +1,25 @@
 /* YOUR CODE GOES HERE */
+#spreadsheet {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+}
+
+th {
+    background-color: #d0d0d0;
+    font-weight: bold;
+}
+
+.row-header {
+    background-color: #d0d0d0;
+}
+
+.selected {
+    background-color: #e0e0ff;
+}
