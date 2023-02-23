@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Spreadsheet</title>
   <link rel="stylesheet" href="styles/spreadsheet.css" />
@@ -16,58 +17,64 @@
 
 <body>
   <table id="spreadsheet">
-    <script>
-      $(document).ready(function () {
-        // load the CSV file
-        $.get("grades.csv", function (data) {
-          console.log("getting grades")
-          // split the data into rows
-          var rows = data.trim().split("\n");
-          // loop through the rows
-          for (var i = 0; i < rows.length; i++) {
-            // split the row into cells
-            var cells = rows[i].split(",");
-            // loop through the cells
-            for (var j = 0; j < cells.length; j++) {
-              // set the cell value in the table
-              $("#spreadsheet tbody tr:eq(" + i + ") td:eq(" + j + ")").text(cells[j]);
-            }
-          }
-        });
-      });
-    </script>
     <thead>
-      <tr>
-        <th>Student ID</th> <!-- empty top-left cell -->
-        <th class="column-header" data-index="0">Column 1</th>
-        <th class="column-header" data-index="1">Column 2</th>
-        <th class="column-header" data-index="2">Column 3</th>
-        <th class="column-header" data-index="3">Column 3</th>
-        <th class="column-header" data-index="4">Column 3</th>
-
-      </tr>
     </thead>
     <tbody>
-      <tr>
-        <th class="row-header" data-index="0">Row 1</th>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th class="row-header" data-index="1">Row 2</th>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th class="row-header" data-index="2">Row 3</th>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
     </tbody>
   </table>
+  <!-- add a script tag after the table HTML -->
+  <script>
+    $(document).ready(function () {
+      // load the CSV file
+      $.get("grades.csv", function (data) {
+        // split the data into rows and cells
+        var rows = data.trim().split("\n");
+        var cells = rows.map(function (row) {
+          return row.split(",");
+        });
+        // create the table HTML
+        var html = "";
+        // add the header row
+        html += "<tr><";
+        for (var j = 0; j < cells[0].length; j++) {
+          html += "<th>" + cells[0][j] + "</th>";
+        }
+        html += "</tr>";
+        // add the data rows
+        for (var i = 1; i < cells.length; i++) {
+          html += "<tr><th>" + cells[i][0] + "</th>";
+          for (var j = 1; j < cells[i].length; j++) {
+            html += "<td class='editable'>" + cells[i][j] + "</td>";
+          }
+          html += "</tr>";
+        }
+        // append the HTML to the table body
+        $("#spreadsheet tbody").html(html);
+
+        // add click handler for editable cells
+        $(".editable").click(function () {
+          var $cell = $(this); // assign the value of `this` to a variable
+          var currentValue = $cell.text();
+          $cell.text("");
+          var $input = $("<input>")
+            .attr("type", "text")
+            .val(currentValue)
+            .appendTo($cell).focus();
+
+          $input.keypress(function (event) {
+            if (event.keyCode === 13) {
+              var newValue = $(this).val();
+              console.log(newValue);
+              $(this).remove();
+              $cell.html(newValue); // use the variable instead of `this`
+              console.log($cell.html()); // log the new value to the console
+            }
+          });
+        });
+
+      });
+    });
+  </script>
 </body>
 
 </html>
