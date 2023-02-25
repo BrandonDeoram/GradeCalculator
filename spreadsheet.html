@@ -8,73 +8,21 @@
     integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script type="text/javascript" src="scripts/spreadsheet.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.1/d3.min.js"
     integrity="sha512-EJphfO0pq9xyT3qaHte1zam2S9a1PZ76oHBjayziMT+2lw/Y0NhkSVHS2rfl3t4UX/eyq/D6f9d2sjA6K9t/Kg=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <script type="text/javascript" src="scripts/chart.js"></script>
+
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.3.0/papaparse.min.js"></script>
 </head>
 
 <body>
   <table id="spreadsheet">
-    <thead>
-    </thead>
     <tbody>
     </tbody>
   </table>
-  <!-- add a script tag after the table HTML -->
-  <script>
-    $(document).ready(function () {
-      // load the CSV file
-      $.get("grades.csv", function (data) {
-        // split the data into rows and cells
-        var rows = data.trim().split("\n");
-        var cells = rows.map(function (row) {
-          return row.split(",");
-        });
-        // create the table HTML
-        var html = "";
-        // add the header row
-        html += "<tr><";
-        for (var j = 0; j < cells[0].length; j++) {
-          html += "<th>" + cells[0][j] + "</th>";
-        }
-        html += "</tr>";
-        // add the data rows
-        for (var i = 1; i < cells.length; i++) {
-          html += "<tr><th>" + cells[i][0] + "</th>";
-          for (var j = 1; j < cells[i].length; j++) {
-            html += "<td class='editable'>" + cells[i][j] + "</td>";
-          }
-          html += "</tr>";
-        }
-        // append the HTML to the table body
-        $("#spreadsheet tbody").html(html);
-
-        // add click handler for editable cells
-        $(".editable").click(function () {
-          var $cell = $(this); // assign the value of `this` to a variable
-          var currentValue = $cell.text();
-          $cell.text("");
-          var $input = $("<input>")
-            .attr("type", "text")
-            .val(currentValue)
-            .appendTo($cell).focus();
-
-          $input.keypress(function (event) {
-            if (event.keyCode === 13) {
-              var newValue = $(this).val();
-              console.log(newValue);
-              $(this).remove();
-              $cell.html(newValue); // use the variable instead of `this`
-              console.log($cell.html()); // log the new value to the console
-            }
-          });
-        });
-
-      });
-    });
-  </script>
 </body>
 
 </html>
