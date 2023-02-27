@@ -13,6 +13,7 @@ function getGrade(mark) {
         return 'A';
     }
 }
+//creates bar chart
 function createBarChart(frequencies) {
     // Remove any previous chart
     d3.select('#chart').selectAll('*').remove();
