@@ -74,22 +74,22 @@ $(document).ready(function () {
     });
 
     // deselect all cells and rows
-    function deselectAll() {
-      $("#spreadsheet td.selected").removeClass("selected");
-      $("#spreadsheet tr.selected").removeClass("selected");
-    }
+    // function deselectAll() {
+    //   $("#spreadsheet td.selected").removeClass("selected");
+    //   $("#spreadsheet tr.selected").removeClass("selected");
+    // }
 
 
-    // select a row
-    function selectRow(rowIndex) {
-      deselectAll();
-      $("#spreadsheet tbody tr:eq(" + (rowIndex + 1) + ") td").addClass("selected");
-    }
+    // // select a row
+    // function selectRow(rowIndex) {
+    //   deselectAll();
+    //   $("#spreadsheet tbody tr:eq(" + (rowIndex + 1) + ") td").addClass("selected");
+    // }
 
-    // select a column
-    function selectColumn(colIndex) {
-      deselectAll();
-      $("#spreadsheet tbody td:nth-child(" + (colIndex + 1) + ")").addClass("selected");
-    }
+    // // select a column
+    // function selectColumn(colIndex) {
+    //   deselectAll();
+    //   $("#spreadsheet tbody td:nth-child(" + (colIndex + 1) + ")").addClass("selected");
+    // }
   });
 });
