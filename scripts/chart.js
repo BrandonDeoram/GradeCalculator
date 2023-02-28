@@ -18,12 +18,12 @@ function createBarChart(frequencies) {
     // Remove any previous chart
     d3.select('#chart').selectAll('*').remove();
 
-    // Set up chart dimensions
+    
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
     const width = 500 - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
 
-    // Create chart SVG element
+    
     const svg = d3.select('#chart')
         .append('svg')
         .attr('width', width + 900 + margin.left + margin.right)
@@ -31,7 +31,7 @@ function createBarChart(frequencies) {
         .append('g')
         .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
-    // Set up x and y scales
+   
     const xScale = d3.scaleBand()
         .range([0, width])
         .domain(['A', 'B', 'C', 'D', 'F'])

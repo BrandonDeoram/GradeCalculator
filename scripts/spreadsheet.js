@@ -8,13 +8,13 @@ $(document).ready(function () {
     });
     // create the table HTML
     var html = "";
-    // add the header row
+    
     html += "<tr>";
     for (var j = 0; j < cells[0].length; j++) {
       html += "<th class='column-header' data-index='" + j + "'>" + cells[0][j] + "</th>";
     }
     html += "</tr>";
-    // add the data rows
+   
     for (var i = 1; i < cells.length; i++) {
       html += "<tr><th class='row-header' data-index='" + (i - 1) + "'>" + cells[i][0] + "</th>";
       for (var j = 1; j < cells[i].length; j++) {
@@ -22,10 +22,10 @@ $(document).ready(function () {
       }
       html += "</tr>";
     }
-    // append the HTML to the table body
+    
     $("#spreadsheet tbody").html(html);
 
-    // add click handler for editable cells
+    
     $(".editable").click(function () {
       var $cell = $(this); // assign the value of `this` to a variable
       var currentValue = $cell.text();
