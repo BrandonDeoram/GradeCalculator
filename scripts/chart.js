@@ -1,5 +1,3 @@
-// YOUR CODE GOES HERE
-
 function getGrade(mark) {
     if (mark < 5.0) {
         return 'F';
@@ -76,7 +74,7 @@ function createBarChart(frequencies) {
         .text('Grade Distribution');
 
     console.log(frequencies);
-    // Create bars
+   
     svg.selectAll('.bar')
         .data(Object.entries(frequencies))
         .enter()
@@ -118,9 +116,6 @@ function selectRow(rowIndex) {
 
 
 }
-
-
-
 
 
 // select a column and highlights 
