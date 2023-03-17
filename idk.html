@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch with JSON</title>
+  </head>
+
+  <body>
+    <script>
+      let x = 5;
+      let d;
+      fetch("testData.json")
+        .then((resp) => resp.json())
+        .then(function (data) {
+          console.log(data);
+          d = data;
+          updateOutput();
+        })
+        .catch(function (error) {
+          // error
+          console.log(error);
+        });
+      console.log("logging: " + d);
+      function updateOutput() {
+        console.log(d);
+      }
+
+      console.log("x", x);
+      console.log("d", d);
+      console.log('d should have a value but I keep getting "undefined"');
+    </script>
+  </body>
+</html>
